@@ -60,7 +60,7 @@ private class JSONSource extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... arg0) {
         http2string = new HTTP2String(url);
-        String response = sh.makeServiceCall(url);
+        String response = http2string.makeServiceCall(url);
 
         Log.e(TAG, "Response from url: " + jsonStr);
 
