@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class NewsAdapter extends BaseExpandableListAdapter {
 
@@ -39,8 +42,9 @@ public class NewsAdapter extends BaseExpandableListAdapter {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.news_item, null);
         }
-        ImageFromURL image_from_url = new ImageFromURL((ImageView) convertView.findViewById(R.id.news_image));
-        image_from_url.execute(getChild(groupPosition, childPosition).image);
+        Picasso.with(context).load(getChild(groupPosition, childPosition).image).into((ImageView) convertView.findViewById(R.id.news_image));
+        //ImageFromURL image_from_url = new ImageFromURL((ImageView) convertView.findViewById(R.id.news_image));
+        //image_from_url.execute(getChild(groupPosition, childPosition).image);
         TextView title_text_view = (TextView) convertView.findViewById(R.id.news_item_title);
         title_text_view.setText(getChild(groupPosition, childPosition).title);
         TextView date_text_view = (TextView) convertView.findViewById(R.id.news_date);
@@ -76,6 +80,8 @@ public class NewsAdapter extends BaseExpandableListAdapter {
         }
         TextView name_text_view = (TextView) convertView.findViewById(R.id.news_group_name);
         name_text_view.setText(getGroup(groupPosition).name);
+        ExpandableListView expandable_list_view = (ExpandableListView) parent;
+        expandable_list_view.expandGroup(groupPosition);
         return convertView;
     }
 
