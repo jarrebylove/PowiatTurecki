@@ -3,6 +3,7 @@ package pl.turek.powiat.powiatturecki;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -33,6 +34,7 @@ public abstract class NewsSource extends JSONSource {
     @Override
     public void processJSON(String response) {
         if (response != null) {
+            SimpleDateFormat json_date_format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             try {
                 JSONArray json_news_groups = new JSONArray(response);
                 for (int i = 0; i < json_news_groups.length(); i++) {
@@ -50,6 +52,8 @@ public abstract class NewsSource extends JSONSource {
                         news_item.id = json_news_item.getInt("id");
                         news_item.title = json_news_item.getString("title");
                         news_item.page_id = json_news_item.getInt("page_id");
+                        news_item.datetime = json_date_format.parse(json_news_item.getString("datetime"));
+                        news_item.sticky = json_news_item.getBoolean("sticky");
                         news_group.news_items.add(news_item);
                     }
                     news_groups.add(news_group);

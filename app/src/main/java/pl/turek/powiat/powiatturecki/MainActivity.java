@@ -8,14 +8,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private ListView news_group_list_view ;
-    private ArrayAdapter<String> news_group_adapter ;
 
     class News extends NewsSource {
 
@@ -28,20 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void processResults(ArrayList<NewsGroup> news_groups) {
-            news_group_list_view = (ListView) findViewById(R.id.NewsGroupListView);
-            news_group_adapter = new ArrayAdapter<>(activity, R.layout.news_group, R.id.news_group_name);
-            for(NewsGroup news_group : news_groups) {
-                //
-                ListView news_item_list_view = (ListView) findViewById(R.id.NewsItemListView);
-                ArrayAdapter<String> news_item_adapter = new ArrayAdapter<>(activity, R.layout.news_item, R.id.news_item_title);
-                for(NewsItem news_item : news_group.news_items){
-                    news_item_adapter.add(news_item.title);
-                }
-                //news_item_list_view.setAdapter(news_item_adapter);
-                //
-                news_group_adapter.add(news_group.name);
-            }
-            news_group_list_view.setAdapter(news_group_adapter);
+            ExpandableListView news_group_expandalne_list_view = (ExpandableListView) findViewById(R.id.NewsGroupExpandableListView);
+            NewsAdapter news_adapter = new NewsAdapter(activity, news_groups);
+            news_group_expandalne_list_view.setAdapter(news_adapter);
         }
     }
 
