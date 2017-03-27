@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class NewsAdapter extends BaseExpandableListAdapter {
@@ -38,6 +39,8 @@ public class NewsAdapter extends BaseExpandableListAdapter {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.news_item, null);
         }
+        ImageFromURL image_from_url = new ImageFromURL((ImageView) convertView.findViewById(R.id.news_image));
+        image_from_url.execute(getChild(groupPosition, childPosition).image);
         TextView title_text_view = (TextView) convertView.findViewById(R.id.news_item_title);
         title_text_view.setText(getChild(groupPosition, childPosition).title);
         TextView date_text_view = (TextView) convertView.findViewById(R.id.news_date);

@@ -23,6 +23,7 @@ public abstract class NewsSource extends JSONSource {
         public int id;
         public String title;
         public int page_id;
+        public String image;
         public Date datetime;
         public boolean sticky;
     }
@@ -52,6 +53,7 @@ public abstract class NewsSource extends JSONSource {
                         news_item.id = json_news_item.getInt("id");
                         news_item.title = json_news_item.getString("title");
                         news_item.page_id = json_news_item.getInt("page_id");
+                        news_item.image = "https://www.powiat.turek.pl" + json_news_item.getString("image");
                         news_item.datetime = json_date_format.parse(json_news_item.getString("datetime"));
                         news_item.sticky = json_news_item.getBoolean("sticky");
                         news_group.news_items.add(news_item);
