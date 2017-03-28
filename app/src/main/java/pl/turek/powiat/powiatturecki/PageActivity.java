@@ -1,6 +1,7 @@
 package pl.turek.powiat.powiatturecki;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -31,7 +32,12 @@ public class PageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page);
-
-        Page page = new Page(this, 1);
+        Intent intent= getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null) {
+            int id =(int) bundle.get("id");
+            Page page = new Page(this, id);
+            page.execute();
+        }
     }
 }

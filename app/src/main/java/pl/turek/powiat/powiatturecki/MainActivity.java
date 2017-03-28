@@ -1,15 +1,18 @@
 package pl.turek.powiat.powiatturecki;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,10 +30,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void processResults(ArrayList<NewsGroup> news_groups) {
+        public void processResults(final ArrayList<NewsGroup> news_groups) {
             ExpandableListView news_group_expandalne_list_view = (ExpandableListView) findViewById(R.id.NewsGroupExpandableListView);
             NewsAdapter news_adapter = new NewsAdapter(activity, news_groups);
             news_group_expandalne_list_view.setAdapter(news_adapter);
+            news_group_expandalne_list_view.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                    Intent pageIntent = new Intent(MainActivity.this, PageActivity.class);
+                    pageIntent.putExtra("id", news_groups.get(groupPosition).news_items.get(childPosition).page_id);
+                    MainActivity.this.startActivity(pageIntent);
+                    MainActivity.this.finish();
+                    return true;
+                }
+            });
         }
     }
 
