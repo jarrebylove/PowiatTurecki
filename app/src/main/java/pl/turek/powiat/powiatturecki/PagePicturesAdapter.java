@@ -36,7 +36,7 @@ public class PagePicturesAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    /*public View getView(int position, View convertView, ViewGroup parent) {
         ImageView picture;
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -48,6 +48,19 @@ public class PagePicturesAdapter extends BaseAdapter {
 
         Picasso.with(context).load(getItem(position).thumb).into(picture);
         return picture;
+    }*/
+    public View getView(int position, View convertView, ViewGroup parent) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View gridView;
+        if (convertView == null) {
+            gridView = new View(context);
+            gridView = inflater.inflate(R.layout.page_picture, null);
+            ImageView picture = (ImageView) gridView.findViewById(R.id.page_picture);
+            Picasso.with(context).load(getItem(position).thumb).into(picture);
+       } else {
+            gridView = (View) convertView;
+        }
+        return gridView;
     }
 
     @Override
