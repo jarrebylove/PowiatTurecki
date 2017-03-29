@@ -1,5 +1,7 @@
 package pl.turek.powiat.powiatturecki;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,7 +16,16 @@ public abstract class PageSource extends JSONSource {
     public class Page {
         public int id;
         public String title;
+        public String banner;
         public String body;
+        public ArrayList<Picture> pictures;
+    }
+
+    public class Picture {
+        public int id;
+        public String image;
+        public String thumb;
+        public String name;
     }
 
     public PageSource(int page_id) {
@@ -24,13 +35,25 @@ public abstract class PageSource extends JSONSource {
     @Override
     public void processJSON(String response) {
         if (response != null) {
-            //SimpleDateFormat json_date_format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             try {
                 JSONObject json_page = new JSONObject(response);
                 page.id = json_page.getInt("id");
                 page.title = json_page.getString("title");
+                page.banner = "https://www.powiat.turek.pl" + json_page.getString("banner");
                 page.body = json_page.getString("body");
+                page.pictures = new ArrayList<>();
+                JSONArray json_pictures = new JSONArray(json_page.getString("pictures"));
+                for (int i = 0; i < json_pictures.length(); i++) {
+                    JSONObject json_picture = json_pictures.getJSONObject(i);
+                    Picture picture = new Picture();
+                    picture.id = json_picture.getInt("id");
+                    picture.image = "https://www.powiat.turek.pl" + json_picture.getString("image");
+                    picture.thumb = "https://www.powiat.turek.pl" + json_picture.getString("thumb");
+                    picture.name = json_picture.getString("name");
+                    page.pictures.add(picture);
+                }
             } catch (Exception e) {
+            Log.e("E", e.getMessage());
             }
             processResults(page);
         }

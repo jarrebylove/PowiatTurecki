@@ -20,9 +20,9 @@ public class NewsAdapter extends BaseExpandableListAdapter {
     private ArrayList<NewsSource.NewsGroup> news_groups;
     private SimpleDateFormat date_format;
 
-    public NewsAdapter(Context context_, ArrayList<NewsSource.NewsGroup> news_groups_) {
-        context = context_;
-        news_groups = news_groups_;
+    public NewsAdapter(Context context, ArrayList<NewsSource.NewsGroup> news_groups) {
+        this.context = context;
+        this.news_groups = news_groups;
         date_format = new SimpleDateFormat("yyyy.MM,dd");
     }
 
@@ -42,9 +42,8 @@ public class NewsAdapter extends BaseExpandableListAdapter {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.news_item, null);
         }
-        Picasso.with(context).load(getChild(groupPosition, childPosition).image).into((ImageView) convertView.findViewById(R.id.news_image));
-        //ImageFromURL image_from_url = new ImageFromURL((ImageView) convertView.findViewById(R.id.news_image));
-        //image_from_url.execute(getChild(groupPosition, childPosition).image);
+        ImageView image = (ImageView) convertView.findViewById(R.id.news_image);
+        Picasso.with(context).load(getChild(groupPosition, childPosition).image).into(image);
         TextView title_text_view = (TextView) convertView.findViewById(R.id.news_item_title);
         title_text_view.setText(getChild(groupPosition, childPosition).title);
         TextView date_text_view = (TextView) convertView.findViewById(R.id.news_date);

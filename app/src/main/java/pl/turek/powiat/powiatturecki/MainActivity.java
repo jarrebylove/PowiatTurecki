@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent pageIntent = new Intent(MainActivity.this, PageActivity.class);
                     pageIntent.putExtra("id", news_groups.get(groupPosition).news_items.get(childPosition).page_id);
                     MainActivity.this.startActivity(pageIntent);
-                    MainActivity.this.finish();
                     return true;
                 }
             });
