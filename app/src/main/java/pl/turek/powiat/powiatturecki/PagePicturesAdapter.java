@@ -50,17 +50,22 @@ public class PagePicturesAdapter extends BaseAdapter {
         return picture;
     }*/
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View gridView;
+        //LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //View gridView;
+        ImageView picture;
         if (convertView == null) {
-            gridView = new View(context);
-            gridView = inflater.inflate(R.layout.page_picture, null);
-            ImageView picture = (ImageView) gridView.findViewById(R.id.page_picture);
-            Picasso.with(context).load(getItem(position).thumb).into(picture);
-       } else {
-            gridView = (View) convertView;
+            //gridView = new View(context);
+            //gridView = inflater.inflate(R.layout.page_picture, null);
+            //ImageView picture = (ImageView) gridView.findViewById(R.id.page_picture);
+            //Picasso.with(context).load(getItem(position).thumb).into(picture);
+            picture = new ImageView(context);
+        } else {
+            //gridView = (View) convertView;
+            picture = (ImageView) convertView;
         }
-        return gridView;
+        Picasso.with(context).load(getItem(position).thumb).into(picture);
+        return picture;
+        //return gridView;
     }
 
     @Override
