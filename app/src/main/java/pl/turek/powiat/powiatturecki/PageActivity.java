@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -32,9 +33,16 @@ public class PageActivity extends AppCompatActivity {
             TextView body = (TextView) findViewById(R.id.page_body);
             body.setText(Html.fromHtml(page.body));
             if (page.pictures.size() > 0) {
-                GridView page_pictures = (GridView) findViewById(R.id.page_pictures);
+                ExpandableHeightGridView page_pictures = (ExpandableHeightGridView) findViewById(R.id.page_pictures);
                 PagePicturesAdapter page_pictures_adapter = new PagePicturesAdapter(activity, page.pictures);
                 page_pictures.setAdapter(page_pictures_adapter);
+                page_pictures.setOnTouchListener(new View.OnTouchListener(){
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return event.getAction() == MotionEvent.ACTION_MOVE;
+                    }
+                });
+                page_pictures.setExpanded(true);
             }
         }
     }
