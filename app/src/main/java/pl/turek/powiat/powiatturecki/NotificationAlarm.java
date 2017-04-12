@@ -24,5 +24,6 @@ public class NotificationAlarm extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Messages messages = new Messages();
         messages.execute();
+        MessagesDB messages_db = new MessagesDB(context);
     }
 }
