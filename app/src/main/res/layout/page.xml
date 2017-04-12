@@ -24,8 +24,9 @@
                 android:id="@+id/page_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="8sp"
                 android:text="TextView"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <android.support.percent.PercentRelativeLayout
@@ -37,6 +38,7 @@
                     android:id="@+id/page_banner"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:padding="8dp"
                     app:layout_aspectRatio="178%"
                     app:layout_widthPercent="100%" />
 
@@ -47,6 +49,7 @@
                 android:id="@+id/page_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="8sp"
                 android:text="TextView" />
 
             <pl.turek.powiat.powiatturecki.ExpandableHeightGridView
@@ -54,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:numColumns="auto_fit"
+                android:padding="8dp"
                 android:stretchMode="columnWidth" />
 
         </LinearLayout>
