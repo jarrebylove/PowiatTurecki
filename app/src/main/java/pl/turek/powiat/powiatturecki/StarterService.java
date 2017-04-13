@@ -10,7 +10,7 @@ import android.os.IBinder;
 public class StarterService extends Service {
 
     @Override
-    public void onStart(Intent intent, int startid) {
+    public void onCreate() {
         Intent i = new Intent(this, NotificationAlarm.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);

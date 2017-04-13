@@ -40,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                    Intent pageIntent = new Intent(MainActivity.this, PageActivity.class);
-                    pageIntent.putExtra("id", news_groups.get(groupPosition).news_items.get(childPosition).page_id);
-                    MainActivity.this.startActivity(pageIntent);
+                    Intent page_intent = new Intent(MainActivity.this, PageActivity.class);
+                    page_intent.putExtra("id", news_groups.get(groupPosition).news_items.get(childPosition).page_id);
+                    MainActivity.this.startActivity(page_intent);
                     return true;
                 }
             });
@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
         News news = new News(this);
         news.execute();
+        Intent intent = new Intent(this, StarterService.class);
+        startService(intent);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

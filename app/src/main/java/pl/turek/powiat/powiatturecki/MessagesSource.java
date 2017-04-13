@@ -1,5 +1,7 @@
 package pl.turek.powiat.powiatturecki;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,19 +34,23 @@ public abstract class MessagesSource extends JSONSource {
             try {
                 JSONArray json_messages = new JSONArray(response);
                 for (int i = 0; i < json_messages.length(); i++) {
+                    Log.i("bg", "Message precess json");
                     JSONObject json_message = json_messages.getJSONObject(i);
                     Message message = new Message();
                     message.id = json_message.getInt("id");
                     message.source_id = json_message.getInt("source_id");
                     message.category_id = json_message.getInt("category_id");
                     message.begin = json_date_format.parse(json_message.getString("begin"));
-                    message.end = json_date_format.parse(json_message.getString("end"));
+                    if (json_message.getString("end") != "null")
+                        message.end = json_date_format.parse(json_message.getString("end"));
                     message.title = json_message.getString("title");
                     message.page_id = json_message.getInt("page_id");
                     messages.add(message);
                 }
             } catch (Exception e) {
+                Log.i("bg", "Message precess json exception: "+e.getMessage());
             }
+            Log.i("bg", "Message precess json after");
             processResults(messages);
         }
     }
