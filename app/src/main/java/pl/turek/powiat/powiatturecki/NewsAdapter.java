@@ -23,7 +23,7 @@ public class NewsAdapter extends BaseExpandableListAdapter {
     public NewsAdapter(Context context, ArrayList<NewsSource.NewsGroup> news_groups) {
         this.context = context;
         this.news_groups = news_groups;
-        date_format = new SimpleDateFormat("yyyy.MM,dd");
+        date_format = new SimpleDateFormat("yyyy.MM.dd");
     }
 
     @Override
