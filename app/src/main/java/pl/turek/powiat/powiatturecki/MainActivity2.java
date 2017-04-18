@@ -20,15 +20,15 @@ public class MainActivity2 extends AppCompatActivity {
 
         private Activity activity;
 
-        public News(Activity activity_) {
+        public News(Activity activity) {
             super();
-            activity = activity_;
+            this.activity = activity;
         }
 
         @Override
         public void processResults(final ArrayList<NewsGroup> news_groups) {
             ViewPager news_group_pager = (ViewPager) findViewById(R.id.news_group_pager);
-            NewsGroupsPageAdapter adapter = new NewsGroupsPageAdapter(news_groups);
+            NewsGroupsPageAdapter adapter = new NewsGroupsPageAdapter(news_groups, activity);
             news_group_pager.setAdapter(adapter);
 
         }

@@ -30,7 +30,7 @@ public class NewsGroupAdapter extends ArrayAdapter<NewsSource.NewsItem> {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.news_item, null);
+            convertView = infalInflater.inflate(R.layout.news_item2, null);
         }
         ImageView image = (ImageView) convertView.findViewById(R.id.news_image);
         Picasso.with(context).load(news_items.get(position).image).into(image);

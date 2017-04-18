@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         private Activity activity;
 
-        public News(Activity activity_) {
+        public News(Activity activity) {
             super();
-            activity = activity_;
+            this.activity = activity;
         }
 
         @Override

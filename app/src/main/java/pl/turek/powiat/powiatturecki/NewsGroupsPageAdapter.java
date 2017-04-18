@@ -1,29 +1,41 @@
 package pl.turek.powiat.powiatturecki;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class NewsGroupsPageAdapter extends PagerAdapter {
     private ArrayList<NewsSource.NewsGroup> news_groups;
+    private Activity activity;
 
-    public NewsGroupsPageAdapter(ArrayList<NewsSource.NewsGroup> news_groups) {
+    public NewsGroupsPageAdapter(ArrayList<NewsSource.NewsGroup> news_groups, Activity activity) {
         super();
         this.news_groups = news_groups;
+        this.activity = activity;
     }
 
     @Override
-    public Object instantiateItem(final ViewGroup container, int position) {
+    public Object instantiateItem(final ViewGroup container, final int group_position) {
         ListView list_view = new ListView(container.getContext());
+        //RecyclerView list_view = new RecyclerView(container.getContext());
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         list_view.setLayoutParams(params);
-        list_view.setAdapter(new NewsGroupAdapter(container.getContext(), news_groups.get(position).news_items));
-        container.addView(list_view);
+        list_view.setAdapter(new NewsGroupAdapter(container.getContext(), news_groups.get(group_position).news_items));
+        list_view.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int child_position, long id) {
+                Intent page_intent = new Intent(activity, PageActivity.class);
+                page_intent.putExtra("id", news_groups.get(group_position).news_items.get(child_position).page_id);
+                activity.startActivity(page_intent);
+            }
+        });container.addView(list_view);
         return list_view;
     }
 
