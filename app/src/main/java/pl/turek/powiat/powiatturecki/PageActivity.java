@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class PageActivity extends AppCompatActivity {
+public class PageActivity extends MainActivity {
 
     class Page extends PageSource {
 
@@ -50,7 +51,11 @@ public class PageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.page);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ViewStub stub = (ViewStub) findViewById(R.id.layout_content);
+        stub.setLayoutResource(R.layout.page);
+        View inflated = stub.inflate();
         Intent intent= getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle != null) {
@@ -59,4 +64,9 @@ public class PageActivity extends AppCompatActivity {
             page.execute();
         }
     }
+    //@Override
+    //public boolean onSupportNavigateUp() {
+        //onBackPressed();
+        //return true;
+    //}
 }
