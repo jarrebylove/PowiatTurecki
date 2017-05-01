@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 public abstract class MainActivity extends AppCompatActivity {
 
@@ -44,7 +45,12 @@ public abstract class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    void loading_start() {
+        findViewById(R.id.loading_animation).setVisibility(View.GONE);
+    }
+    void loading_done() {
+        findViewById(R.id.loading_animation).setVisibility(View.GONE);
+    }
     //public boolean onCreateOptionsMenu(Menu menu) {
     //    MenuInflater inflater = getMenuInflater();
     //    inflater.inflate(R.menu.toolbar_menu, menu);

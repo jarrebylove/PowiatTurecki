@@ -17,11 +17,28 @@ tools:openDrawer="start">
         layout="@layout/toolbar"
         />
 
-    <ViewStub
-        android:id="@+id/layout_content"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout="@layout/news" />
+        android:layout_height="match_parent">
+
+        <ViewStub
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/news" />
+
+        <RelativeLayout
+            android:id="@+id/loading_animation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
+    </FrameLayout>
 
 </LinearLayout>
 

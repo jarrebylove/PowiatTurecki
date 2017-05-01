@@ -6,11 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:padding="5dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp"
-    app:cardUseCompatPadding="true"
-    app:contentPadding="5dp">
+    app:cardUseCompatPadding="true">
 
     <android.support.percent.PercentRelativeLayout
 
@@ -22,8 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_alignParentTop="true"
-            android:padding="8sp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             app:layout_aspectRatio="100%"
             app:layout_widthPercent="30%" />
 

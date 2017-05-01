@@ -24,6 +24,7 @@ public class NewsActivity extends MainActivity {
             ViewPager news_group_pager = (ViewPager) findViewById(R.id.news_group_pager);
             NewsGroupsPageAdapter adapter = new NewsGroupsPageAdapter(news_groups, activity);
             news_group_pager.setAdapter(adapter);
+            loading_done();
         }
     }
 
