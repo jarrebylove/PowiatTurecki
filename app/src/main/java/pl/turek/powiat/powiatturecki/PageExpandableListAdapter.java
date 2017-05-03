@@ -2,13 +2,16 @@ package pl.turek.powiat.powiatturecki;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +34,7 @@ public class PageExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -40,16 +43,28 @@ public class PageExpandableListAdapter extends BaseExpandableListAdapter {
             return 0;
         } else if (groupPosition == 1) {
             return page.pictures.size();
+        } else if (groupPosition == 2) {
+            return page.movies.size();
+        } else if (groupPosition == 3) {
+            return page.files.size();
+        } else if (groupPosition == 4) {
+            return page.links.size();
         }
         return 0;
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
+    public String getGroup(int groupPosition) {
         if (groupPosition == 0) {
             return null;
         } else if (groupPosition == 1) {
-            return "Zdjęcia";
+            return String.format("Zdjęcia (%d)", getChildrenCount(groupPosition));
+        } else if (groupPosition == 2) {
+            return String.format("Filmy (%d)", getChildrenCount(groupPosition));
+        } else if (groupPosition == 3) {
+            return String.format("Pliki (%d)", getChildrenCount(groupPosition));
+        } else if (groupPosition == 4) {
+            return String.format("Linki (%d)", getChildrenCount(groupPosition));
         }
         return null;
     }
@@ -76,6 +91,7 @@ public class PageExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        Log.i("getGroupView", "" + groupPosition);
         if (groupPosition == 0) {
             if (convertView == null) {
                 LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -84,12 +100,23 @@ public class PageExpandableListAdapter extends BaseExpandableListAdapter {
             TextView title = (TextView) convertView.findViewById(R.id.page_title);
             title.setText(page.title);
             ImageView banner = (ImageView) convertView.findViewById(R.id.page_banner);
-            Picasso.with(activity).load(page.banner).into(banner);
+            Picasso.with(context).load(page.banner).into(banner);
             TextView body = (TextView) convertView.findViewById(R.id.page_body);
             body.setText(Html.fromHtml(page.body));
             return convertView;
+        } else {
+            if (convertView == null) {
+                LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = infalInflater.inflate(R.layout.page_group, null);
+            }
+            TextView title = (TextView) convertView.findViewById(R.id.title);
+            title.setText(getGroup(groupPosition));
+            if (getChildrenCount(groupPosition) == 0)
+                convertView.setVisibility(View.GONE);
+            else
+                convertView.setVisibility(View.VISIBLE);
+            return convertView;
         }
-        return convertView;
     }
 
     @Override
@@ -103,7 +130,16 @@ public class PageExpandableListAdapter extends BaseExpandableListAdapter {
                 convertView = infalInflater.inflate(R.layout.page_picture, null);
             }
             picture = (ImageView) convertView.findViewById(R.id.page_picture);
-            Picasso.with(context).load(page.pictures.get(childPosition).thumb).placeholder(R.drawable.ic_turek_county_arms).into(picture);
+            Picasso.with(context).load(page.pictures.get(childPosition).thumb_url).placeholder(R.drawable.ic_turek_county_arms).into(picture);
+            return convertView;
+        } else if (groupPosition == 2) {
+            VideoView video;
+            if (convertView == null) {
+                LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = infalInflater.inflate(R.layout.page_movie, null);
+            }
+            video = (VideoView) convertView.findViewById(R.id.page_video);
+            video.setVideoURI(Uri.parse(page.movies.get(childPosition).url));
             return convertView;
         }
         return null;

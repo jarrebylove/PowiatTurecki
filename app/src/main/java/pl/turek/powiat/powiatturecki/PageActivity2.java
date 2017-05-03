@@ -37,11 +37,9 @@ public class PageActivity2 extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
         ViewStub stub = (ViewStub) findViewById(R.id.layout_content);
         stub.setLayoutResource(R.layout.page2);
-        View inflated = stub.inflate();
+        stub.inflate();
         Intent intent= getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle != null) {
@@ -50,9 +48,4 @@ public class PageActivity2 extends MainActivity {
             page.execute();
         }
     }
-    //@Override
-    //public boolean onSupportNavigateUp() {
-        //onBackPressed();
-        //return true;
-    //}
-}
+ }

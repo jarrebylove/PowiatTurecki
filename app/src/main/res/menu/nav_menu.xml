@@ -9,4 +9,8 @@
         android:id="@+id/action_2"
         android:title="Oferta Edukacyjna"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_3"
+        android:title="Test Page"
+        app:showAsAction="never" />
 </menu>

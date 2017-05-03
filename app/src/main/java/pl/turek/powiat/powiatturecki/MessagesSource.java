@@ -24,7 +24,7 @@ public abstract class MessagesSource extends JSONSource {
     }
 
     public MessagesSource() {
-        super("https://www.powiat.turek.pl/ajax/messages/");
+        super("/ajax/messages/");
         messages = new ArrayList<>();
     }
     @Override

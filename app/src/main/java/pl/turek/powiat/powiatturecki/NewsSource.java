@@ -29,7 +29,7 @@ public abstract class NewsSource extends JSONSource {
     }
 
     public NewsSource() {
-        super("https://www.powiat.turek.pl/ajax/news/");
+        super("/ajax/news/");
         news_groups = new ArrayList<>();
     }
     @Override

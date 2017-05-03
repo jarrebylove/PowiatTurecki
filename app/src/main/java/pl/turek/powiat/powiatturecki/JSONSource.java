@@ -11,6 +11,7 @@ import java.net.URL;
 
 
 public abstract class JSONSource extends AsyncTask<Void, Void, Void> {
+    protected String MASTER_URL = "https://www.powiat.turek.pl";
     private String url;
     private HTTP2String http2string;
     private String response;
@@ -35,9 +36,9 @@ public abstract class JSONSource extends AsyncTask<Void, Void, Void> {
             return sb.toString();
         }
 
-        public HTTP2String(String url_) {
+        public HTTP2String(String url) {
             try {
-                url = new URL(url_);
+                this.url = new URL(url);
             } catch (Exception e) {}
         }
 
@@ -53,8 +54,9 @@ public abstract class JSONSource extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    public JSONSource(String url_) {
-        url = url_;
+    public JSONSource(String url) {
+
+        this.url = MASTER_URL + url;
     }
 
     @Override

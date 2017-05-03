@@ -32,12 +32,18 @@ public abstract class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
+                Intent intent;
                 switch (id) {
                     case R.id.action_1:
-                        Intent i = new Intent(MainActivity.this, NewsActivity.class);
-                        startActivity(i);
+                        intent = new Intent(MainActivity.this, NewsActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.action_2:
+                        break;
+                    case R.id.action_3:
+                        intent = new Intent(MainActivity.this, PageActivity2.class);
+                        intent.putExtra("id", 138);
+                        startActivity(intent);
                         break;
                 }
                 return false;

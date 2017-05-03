@@ -31,7 +31,7 @@ public class NewsGroupsPageAdapter extends PagerAdapter {
         list_view.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int child_position, long id) {
-                Intent page_intent = new Intent(activity, PageActivity.class);
+                Intent page_intent = new Intent(activity, PageActivity2.class);
                 page_intent.putExtra("id", news_groups.get(group_position).news_items.get(child_position).page_id);
                 activity.startActivity(page_intent);
             }
