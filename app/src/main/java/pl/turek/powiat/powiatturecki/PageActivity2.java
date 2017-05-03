@@ -7,6 +7,8 @@ import android.text.Html;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,24 +27,9 @@ public class PageActivity2 extends MainActivity {
 
         @Override
         public void processResults(Page page) {
-            TextView title = (TextView) findViewById(R.id.page_title);
-            title.setText(page.title);
-            ImageView banner = (ImageView) findViewById(R.id.page_banner);
-            Picasso.with(activity).load(page.banner).into(banner);
-            TextView body = (TextView) findViewById(R.id.page_body);
-            body.setText(Html.fromHtml(page.body));
-            if (page.pictures.size() > 0) {
-                ExpandableHeightGridView page_pictures = (ExpandableHeightGridView) findViewById(R.id.page_pictures);
-                PagePicturesAdapter page_pictures_adapter = new PagePicturesAdapter(activity, page.pictures);
-                page_pictures.setAdapter(page_pictures_adapter);
-                page_pictures.setOnTouchListener(new View.OnTouchListener(){
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return event.getAction() == MotionEvent.ACTION_MOVE;
-                    }
-                });
-                page_pictures.setExpanded(true);
-            }
+            PageExpandableListAdapter page_expandable_list_adapter = new PageExpandableListAdapter(activity, PageActivity2.this, page);
+            ExpandableListView page_expandable_list_view = (ExpandableListView) findViewById(R.id.page_expandable_list_view);
+            page_expandable_list_view.setAdapter(page_expandable_list_adapter);
             loading_done();
         }
     }
@@ -53,7 +40,7 @@ public class PageActivity2 extends MainActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
         ViewStub stub = (ViewStub) findViewById(R.id.layout_content);
-        stub.setLayoutResource(R.layout.page);
+        stub.setLayoutResource(R.layout.page2);
         View inflated = stub.inflate();
         Intent intent= getIntent();
         Bundle bundle = intent.getExtras();
