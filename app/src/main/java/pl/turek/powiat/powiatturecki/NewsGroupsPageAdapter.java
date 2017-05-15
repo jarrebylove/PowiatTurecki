@@ -35,7 +35,8 @@ public class NewsGroupsPageAdapter extends PagerAdapter {
                 page_intent.putExtra("id", news_groups.get(group_position).news_items.get(child_position).page_id);
                 activity.startActivity(page_intent);
             }
-        });container.addView(list_view);
+        });
+        container.addView(list_view);
         return list_view;
     }
 

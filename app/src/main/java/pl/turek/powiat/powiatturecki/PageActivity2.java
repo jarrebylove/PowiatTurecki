@@ -40,7 +40,7 @@ public class PageActivity2 extends MainActivity {
         ViewStub stub = (ViewStub) findViewById(R.id.layout_content);
         stub.setLayoutResource(R.layout.page2);
         stub.inflate();
-        Intent intent= getIntent();
+        Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle != null) {
             int id =(int) bundle.get("id");

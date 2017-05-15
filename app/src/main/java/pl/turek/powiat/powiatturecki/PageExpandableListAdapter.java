@@ -2,7 +2,9 @@ package pl.turek.powiat.powiatturecki;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -120,26 +123,44 @@ public class PageExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         if (groupPosition == 0) {
             return null;
         } else if (groupPosition == 1) {
             ImageView picture;
-            if (convertView == null) {
+            //if (convertView == null) {
                 LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = infalInflater.inflate(R.layout.page_picture, null);
-            }
+            //}
             picture = (ImageView) convertView.findViewById(R.id.page_picture);
             Picasso.with(context).load(page.pictures.get(childPosition).thumb_url).placeholder(R.drawable.ic_turek_county_arms).into(picture);
+            picture.setOnClickListener(new ImageView.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent picture_intent = new Intent(activity, PictureActivity.class);
+                    picture_intent.putExtra("url", page.pictures.get(childPosition).url);
+                    activity.startActivity(picture_intent);
+                    //Bundle extra = new Bundle();
+                    //extra.putSerializable("pictures", page.pictures);
+                    //Intent gallery_intent = new Intent(activity, GalleryActivity.class);
+                    //gallery_intent.putExtra("pictures", extra);
+                    //activity.startActivity(gallery_intent);
+                }
+            });
             return convertView;
         } else if (groupPosition == 2) {
             VideoView video;
-            if (convertView == null) {
+            //if (convertView == null) {
                 LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = infalInflater.inflate(R.layout.page_movie, null);
-            }
+            //}
             video = (VideoView) convertView.findViewById(R.id.page_video);
+            MediaController mc = new MediaController(context);
+            mc.setAnchorView(video);
+            mc.setMediaPlayer(video);
+            video.setMediaController(mc);
             video.setVideoURI(Uri.parse(page.movies.get(childPosition).url));
+            video.start();
             return convertView;
         }
         return null;

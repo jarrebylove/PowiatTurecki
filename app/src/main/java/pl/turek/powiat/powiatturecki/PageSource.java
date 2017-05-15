@@ -76,11 +76,11 @@ public abstract class PageSource extends JSONSource {
                 page.movies = new ArrayList<>();
                 JSONArray json_movies = new JSONArray(json_page.getString("movies"));
                 for (int i = 0; i < json_movies.length(); i++) {
-                    JSONObject json_picture = json_movies.getJSONObject(i);
+                    JSONObject json_movie = json_movies.getJSONObject(i);
                     Movie movie = new Movie();
-                    movie.id = json_picture.getInt("id");
-                    movie.url = MASTER_URL + json_picture.getString("url");
-                    movie.name = json_picture.getString("name");
+                    movie.id = json_movie.getInt("id");
+                    movie.url = MASTER_URL + json_movie.getString("url");
+                    movie.name = json_movie.getString("name");
                     page.movies.add(movie);
                 }
                 page.files = new ArrayList<>();
