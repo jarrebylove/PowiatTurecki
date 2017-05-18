@@ -5,45 +5,46 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class PageSource extends JSONSource {
+public abstract class PageSource extends JSONSource implements Serializable {
 
     private Page page;
 
-    public class Page {
+    public class Page implements Serializable {
         public int id;
         public String title;
         public String banner;
         public String body;
-        public ArrayList<Picture> pictures;
+        public ArrayList<PictureCnt> pictures;
         public ArrayList<Movie> movies;
         public ArrayList<File> files;
         public ArrayList<Link> links;
     }
 
-    public class Picture {
+    public class Picture implements Serializable {
         public int id;
         public String url;
         public String thumb_url;
         public String name;
     }
 
-    public class Movie {
+    public class Movie implements Serializable {
         public int id;
         public String url;
         public String name;
     }
 
-    public class File {
+    public class File implements Serializable {
         public int id;
         public String url;
         public String name;
     }
 
-    public class Link {
+    public class Link implements Serializable {
         public int id;
         public String url;
         public String name;
@@ -66,7 +67,7 @@ public abstract class PageSource extends JSONSource {
                 JSONArray json_pictures = new JSONArray(json_page.getString("pictures"));
                 for (int i = 0; i < json_pictures.length(); i++) {
                     JSONObject json_picture = json_pictures.getJSONObject(i);
-                    Picture picture = new Picture();
+                    PictureCnt picture = new PictureCnt();
                     picture.id = json_picture.getInt("id");
                     picture.url = MASTER_URL + json_picture.getString("url");
                     picture.thumb_url = MASTER_URL + json_picture.getString("thumb_url");

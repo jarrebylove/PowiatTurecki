@@ -14,8 +14,10 @@ public class GalleryActivity extends AppCompatActivity {
         setContentView(R.layout.gallery);
         ViewPager gallery = (ViewPager) findViewById(R.id.gallery);
         Bundle extra = getIntent().getBundleExtra("pictures");
-        ArrayList<PageSource.Picture> pictures = (ArrayList<PageSource.Picture>) extra.getSerializable("pictures");
+        ArrayList<PictureCnt> pictures = (ArrayList<PictureCnt>) extra.getSerializable("pictures");
+        int position = (int) getIntent().getExtras().get("position");
         GalleryAdapter adapter = new GalleryAdapter(this.getApplicationContext(), pictures);
         gallery.setAdapter(adapter);
+        gallery.setCurrentItem(position);
     }
 }

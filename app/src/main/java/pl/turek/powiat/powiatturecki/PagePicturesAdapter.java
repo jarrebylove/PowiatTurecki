@@ -19,10 +19,10 @@ import java.util.ArrayList;
 public class PagePicturesAdapter extends ArrayAdapter {
 
     private Context context;
-    private ArrayList<PageSource.Picture> pictures;
+    private ArrayList<PictureCnt> pictures;
     private LayoutInflater inflater;
 
-    public PagePicturesAdapter(Context context, ArrayList<PageSource.Picture> pictures) {
+    public PagePicturesAdapter(Context context, ArrayList<PictureCnt> pictures) {
         super(context, R.layout.page_picture, pictures);
         this.context = context;
         this.pictures = pictures;

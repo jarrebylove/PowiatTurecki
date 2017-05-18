@@ -14,9 +14,9 @@ import java.util.ArrayList;
 class GalleryAdapter extends PagerAdapter {
 
     private Context context;
-    private ArrayList<PageSource.Picture> pictures;
+    private ArrayList<PictureCnt> pictures;
 
-    public GalleryAdapter(Context context, ArrayList<PageSource.Picture> pictures) {
+    public GalleryAdapter(Context context, ArrayList<PictureCnt> pictures) {
         super();
         this.context = context;
         this.pictures = pictures;

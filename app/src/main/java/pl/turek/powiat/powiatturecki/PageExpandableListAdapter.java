@@ -137,14 +137,15 @@ public class PageExpandableListAdapter extends BaseExpandableListAdapter {
             picture.setOnClickListener(new ImageView.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent picture_intent = new Intent(activity, PictureActivity.class);
-                    picture_intent.putExtra("url", page.pictures.get(childPosition).url);
-                    activity.startActivity(picture_intent);
-                    //Bundle extra = new Bundle();
-                    //extra.putSerializable("pictures", page.pictures);
-                    //Intent gallery_intent = new Intent(activity, GalleryActivity.class);
-                    //gallery_intent.putExtra("pictures", extra);
-                    //activity.startActivity(gallery_intent);
+                    //Intent picture_intent = new Intent(activity, PictureActivity.class);
+                    //picture_intent.putExtra("url", page.pictures.get(childPosition).url);
+                    //activity.startActivity(picture_intent);
+                    Bundle extra = new Bundle();
+                    extra.putSerializable("pictures", page.pictures);
+                    Intent gallery_intent = new Intent(activity, GalleryActivity.class);
+                    gallery_intent.putExtra("pictures", extra);
+                    gallery_intent.putExtra("position", childPosition);
+                    activity.startActivity(gallery_intent);
                 }
             });
             return convertView;
