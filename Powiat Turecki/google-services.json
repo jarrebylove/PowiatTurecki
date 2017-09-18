@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "509566378193",
+    "firebase_url": "https://powiat-turecki-powiadomienia.firebaseio.com",
+    "project_id": "powiat-turecki-powiadomienia",
+    "storage_bucket": "powiat-turecki-powiadomienia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509566378193:android:9f178bb95700ff7d",
+        "android_client_info": {
+          "package_name": "pl.turek.powiat.powiatturecki"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "509566378193-6acpogaqp3l2quqbosr6jhjpadaaoq08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIJPPkyoNkWrHVN588tW9O2g2gN0-LvkU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
