@@ -3,6 +3,7 @@ package pl.turek.powiat.powiatturecki;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,26 +24,21 @@ public class NewsGroupsPageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(final ViewGroup container, final int group_position) {
-        ListView list_view = new ListView(container.getContext());
-        //RecyclerView list_view = new RecyclerView(container.getContext());
+        RecyclerView list_view = new RecyclerView(container.getContext());
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         list_view.setLayoutParams(params);
-        list_view.setAdapter(new NewsGroupAdapter(container.getContext(), news_groups.get(group_position).news_items));
-        list_view.setOnItemClickListener(new ListView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int child_position, long id) {
-                Intent page_intent = new Intent(activity, PageActivity.class);
-                page_intent.putExtra("id", news_groups.get(group_position).news_items.get(child_position).page_id);
-                activity.startActivity(page_intent);
-            }
-        });
+        list_view.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(activity);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        list_view.setLayoutManager(llm);
+        list_view.setAdapter(new NewsGroupRecyclerAdapter(activity, container.getContext(), news_groups.get(group_position).news_items));
         container.addView(list_view);
         return list_view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((ListView)object);
+        container.removeView((RecyclerView)object);
     }
     @Override
     public boolean isViewFromObject(View view, Object o) {
