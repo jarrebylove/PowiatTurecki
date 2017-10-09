@@ -9,12 +9,18 @@ import java.util.ArrayList;
 
 public class NewsActivity extends MainActivity implements NewsSourceListener {
 
+    NewsSource news;
+
     @Override
-    public void onLoad(ArrayList<NewsSource.NewsGroup> news_groups) {
-        if(news_groups != null) {
+    public void onLoad() {
+        if(news.news_groups != null) {
             ViewPager news_group_pager = (ViewPager) findViewById(R.id.news_group_pager);
-            NewsGroupsPageAdapter adapter = new NewsGroupsPageAdapter(news_groups, this);
-            news_group_pager.setAdapter(adapter);
+            NewsGroupsPageAdapter adapter = (NewsGroupsPageAdapter)news_group_pager.getAdapter();
+            if (adapter != null)
+                adapter.update();
+            else
+            //NewsGroupsPageAdapter adapter = new NewsGroupsPageAdapter(news, this);
+                news_group_pager.setAdapter(new NewsGroupsPageAdapter(news, this));
             loading_done();
         } else {
             loading_done();
@@ -27,7 +33,7 @@ public class NewsActivity extends MainActivity implements NewsSourceListener {
         ViewStub stub = (ViewStub) findViewById(R.id.layout_content);
         stub.setLayoutResource(R.layout.news);
         View inflated = stub.inflate();
-        NewsSource news = new NewsSource();
+        news = new NewsSource();
         news.addListener(this);
     }
 }

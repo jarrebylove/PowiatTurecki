@@ -9,12 +9,12 @@ import java.util.Date;
 import java.util.List;
 
 interface NewsSourceListener{
-    void onLoad(ArrayList<NewsSource.NewsGroup> news_groups);
+    void onLoad();
 }
 
 public class NewsSource implements JSONSourceListener {
 
-    private ArrayList<NewsGroup> news_groups;
+    public ArrayList<NewsGroup> news_groups;
     private JSONSource source;
     private List<NewsSourceListener> listeners = new ArrayList<>();
 
@@ -103,6 +103,6 @@ public class NewsSource implements JSONSourceListener {
     }
     public void processResults(ArrayList<NewsGroup> news_groups){
         for (NewsSourceListener hl : listeners)
-            hl.onLoad(news_groups);
+            hl.onLoad();
     };
 }

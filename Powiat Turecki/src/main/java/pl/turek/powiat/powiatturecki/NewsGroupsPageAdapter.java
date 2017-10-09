@@ -13,27 +13,28 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class NewsGroupsPageAdapter extends PagerAdapter {
-    private ArrayList<NewsSource.NewsGroup> news_groups;
+    private NewsSource news;
     private Activity activity;
 
-    public NewsGroupsPageAdapter(ArrayList<NewsSource.NewsGroup> news_groups, Activity activity) {
+    public NewsGroupsPageAdapter(NewsSource news, Activity activity) {
         super();
-        this.news_groups = news_groups;
+        this.news = news;
         this.activity = activity;
     }
 
     @Override
     public Object instantiateItem(final ViewGroup container, final int group_position) {
-        RecyclerView list_view = new RecyclerView(container.getContext());
+        RecyclerView recycler_view = new RecyclerView(container.getContext());
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        list_view.setLayoutParams(params);
-        list_view.setHasFixedSize(true);
+        recycler_view.setLayoutParams(params);
+        recycler_view.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(activity);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        list_view.setLayoutManager(llm);
-        list_view.setAdapter(new NewsGroupRecyclerAdapter(activity, container.getContext(), news_groups.get(group_position).news_items));
-        container.addView(list_view);
-        return list_view;
+        recycler_view.setLayoutManager(llm);
+        NewsGroupRecyclerAdapter newsGroupRecyclerAdapter = new NewsGroupRecyclerAdapter(activity, container.getContext(), recycler_view, news, group_position);
+        recycler_view.setAdapter(newsGroupRecyclerAdapter);
+        container.addView(recycler_view);
+        return recycler_view;
     }
 
     @Override
@@ -47,11 +48,15 @@ public class NewsGroupsPageAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return news_groups.size();
+        return news.news_groups.size();
     }
 
     @Override
     public String getPageTitle(int position) {
-       return news_groups.get(position).name;
+       return news.news_groups.get(position).name;
+    }
+
+    public void update() {
+        //this.
     }
 }
