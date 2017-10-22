@@ -16,10 +16,7 @@ public class NewsActivity extends MainActivity implements NewsSourceListener {
         if(news.news_groups != null) {
             ViewPager news_group_pager = (ViewPager) findViewById(R.id.news_group_pager);
             NewsGroupsPageAdapter adapter = (NewsGroupsPageAdapter)news_group_pager.getAdapter();
-            if (adapter != null)
-                adapter.update();
-            else
-            //NewsGroupsPageAdapter adapter = new NewsGroupsPageAdapter(news, this);
+            if (adapter == null)
                 news_group_pager.setAdapter(new NewsGroupsPageAdapter(news, this));
             loading_done();
         } else {

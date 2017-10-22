@@ -21,4 +21,8 @@
         android:id="@+id/action_5"
         android:title="Powiadomienia"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_6"
+        android:title="PageActivity2"
+        app:showAsAction="never" />
 </menu>

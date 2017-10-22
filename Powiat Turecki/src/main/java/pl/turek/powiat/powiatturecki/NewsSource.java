@@ -1,5 +1,7 @@
 package pl.turek.powiat.powiatturecki;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -51,6 +53,7 @@ public class NewsSource implements JSONSourceListener {
             if (ng.id == group_id) {
                 offset = ng.news_items.size();
             }
+        Log.d("lM", "/ajax/news/?g="+group_id+"&o="+offset+"&a="+amount);
         source = new JSONSource("/ajax/news/?g="+group_id+"&o="+offset+"&a="+amount);
         source.addListener(this);
         source.execute();

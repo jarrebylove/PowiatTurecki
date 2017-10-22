@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
-public class NewsGroupRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NewsGroupRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  implements NewsSourceListener {
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     private boolean isLoading;
@@ -27,17 +27,14 @@ public class NewsGroupRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
 
     private final Activity activity;
     private final Context context;
-    //private final ArrayList<NewsSource.NewsItem> news_items;
     private final NewsSource news;
     private final int group_id;
     private SimpleDateFormat date_format;
 
-    //public NewsGroupRecyclerAdapter(Activity activity, Context context, RecyclerView recyclerView, ArrayList<NewsSource.NewsItem> news_items) {
     public NewsGroupRecyclerAdapter(Activity activity, Context context, RecyclerView recyclerView, NewsSource news, int group_id) {
         super();
         this.activity = activity;
         this.context = context;
-        //this.news_items = news_items;
         this.news = news;
         this.group_id = group_id;
         date_format = new SimpleDateFormat("yyyy.MM.dd");
@@ -59,8 +56,8 @@ public class NewsGroupRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
     }
     private OnLoadMoreListener onLoadMoreListener;
 
-    public void setOnLoadMoreListener(OnLoadMoreListener mOnLoadMoreListener) {
-        this.onLoadMoreListener = mOnLoadMoreListener;
+    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
+        this.onLoadMoreListener = onLoadMoreListener;
     }
 
     @Override
@@ -103,6 +100,12 @@ public class NewsGroupRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.
 
     public void setLoaded() {
         isLoading = false;
+    }
+
+    @Override
+    public void onLoad() {
+        this.notifyDataSetChanged();
+        this.setLoaded();
     }
 
     private class LoadingViewHolder extends RecyclerView.ViewHolder {

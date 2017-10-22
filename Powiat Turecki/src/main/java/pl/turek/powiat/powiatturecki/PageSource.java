@@ -6,9 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 interface PageSourceListener{
@@ -17,7 +15,7 @@ interface PageSourceListener{
 
 public class PageSource implements JSONSourceListener, Serializable {
 
-    private Page page;
+    public Page page;
     private JSONSource source;
     private List<PageSourceListener> listeners = new ArrayList<>();
 

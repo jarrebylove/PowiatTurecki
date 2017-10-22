@@ -58,6 +58,11 @@ public abstract class MainActivity extends AppCompatActivity {
                         //intent.putExtra("id", 138);
                         startActivity(intent);
                         break;
+                    case R.id.action_6:
+                        intent = new Intent(MainActivity.this, PageActivity2.class);
+                        intent.putExtra("id", 138);
+                        startActivity(intent);
+                        break;
                 }
                 return false;
             }
