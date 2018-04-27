@@ -63,6 +63,10 @@ public abstract class MainActivity extends AppCompatActivity {
                         intent.putExtra("id", 138);
                         startActivity(intent);
                         break;
+                    case R.id.action_7:
+                        intent = new Intent(MainActivity.this, LifeBandActivity.class);
+                        startActivity(intent);
+                        break;
                 }
                 return false;
             }

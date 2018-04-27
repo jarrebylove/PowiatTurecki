@@ -25,4 +25,8 @@
         android:id="@+id/action_6"
         android:title="PageActivity2"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_7"
+        android:title="Opaska Życia"
+        app:showAsAction="never" />
 </menu>
