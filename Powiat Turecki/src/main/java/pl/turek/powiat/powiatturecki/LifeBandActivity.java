@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.nfc.tech.MifareClassic;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.view.ViewStub;
 
@@ -17,6 +18,14 @@ public class LifeBandActivity extends MainActivity {
         ViewStub stub = (ViewStub) findViewById(R.id.layout_content);
         stub.setLayoutResource(R.layout.life_band);
         View inflated = stub.inflate();
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.life_band_edit_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LifeBandActivity.this, LifeBandEditActivity.class);
+                startActivity(intent);
+            }
+        });
         PendingIntent mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
 

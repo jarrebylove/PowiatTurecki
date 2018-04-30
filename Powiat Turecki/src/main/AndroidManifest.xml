@@ -37,6 +37,7 @@
         <activity android:name=".MessagesActivity" />
         <activity android:name=".PageActivity2" />
         <activity android:name=".LifeBandActivity"/>
+        <activity android:name=".LifeBandEditActivity"/>
         <activity android:name=".LifeBandShowActivity">
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED"/>
